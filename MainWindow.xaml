@@ -1,0 +1,227 @@
+﻿<Window x:Class="DH_ZhouBao.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DH_ZhouBao"
+        mc:Ignorable="d"
+        Title="运营开发部工作搜集整理工具" Width="1000" Closed="Window_Closed">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <WrapPanel  Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
+                <TextBlock Text="" VerticalAlignment="Center" Name="IdentityInfo" Margin="0,0,5,0" />
+                <Button  VerticalAlignment="Center" HorizontalAlignment="Left" Click="Button_Click_5" Style="{StaticResource ButtonNormal}" Name="UpdateNameBtn">
+                    <TextBlock>修改</TextBlock>
+                </Button>
+            </WrapPanel>
+            <Button Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Click="Button_Click" Style="{StaticResource ButtonNormal}">
+                <TextBlock>添加一项</TextBlock>
+            </Button>
+        </Grid>
+
+        <ListView x:Name="listView" ItemsSource="{Binding}" Grid.Row="1" Grid.Column="0" >
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <!--<GridViewColumn>
+                            <GridViewColumnHeader Content="类型" Padding="5"/>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox DropDownClosed="ComboBox_DropDownClosed" SelectedIndex="{Binding Path=type_selected_index}" Style="{StaticResource SelectNormal}" IsReadOnly="True">
+                                        <ComboBoxItem>本阶段</ComboBoxItem>
+                                        <ComboBoxItem>下阶段</ComboBoxItem>
+                                    </ComboBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>-->
+                        <GridViewColumn Header="项目">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox  Style="{StaticResource SelectNormal}" Width="170" DropDownOpened="ComboBox_DropDownOpened" DropDownClosed="ComboBox_DropDownClosed_1" SelectedIndex="{Binding Path=project_selected_index}">
+                                        <ComboBoxItem>请选择项目</ComboBoxItem>
+                                        <ComboBoxItem>
+                                            <TextBox Width="170" TextChanged="TextBox_TextChanged" Padding="3" Margin="3"></TextBox>
+                                        </ComboBoxItem>
+                                        <ComboBoxItem Content="{Binding Path=project}"></ComboBoxItem>
+                                    </ComboBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="内容">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Width="400" Text="{Binding Path=content}" TextChanged="TextBox_TextChanged_1" Style="{StaticResource TextBoxNormal}"></TextBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="进度">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox DropDownClosed="ComboBox_DropDownClosed_2" SelectedIndex="{Binding Path=process_selected_index}"  Style="{StaticResource SelectNormal}">
+                                        <ComboBoxItem>不选也没事</ComboBoxItem>
+                                        <ComboBoxItem>已上线</ComboBoxItem>
+                                        <ComboBoxItem>测试中</ComboBoxItem>
+                                        <ComboBoxItem>已完成</ComboBoxItem>
+                                        <ComboBoxItem>完成90%</ComboBoxItem>
+                                        <ComboBoxItem>完成80%</ComboBoxItem>
+                                        <ComboBoxItem>完成70%</ComboBoxItem>
+                                        <ComboBoxItem>完成60%</ComboBoxItem>
+                                        <ComboBoxItem>完成50%</ComboBoxItem>
+                                        <ComboBoxItem>完成40%</ComboBoxItem>
+                                        <ComboBoxItem>完成30%</ComboBoxItem>
+                                        <ComboBoxItem>完成20%</ComboBoxItem>
+                                        <ComboBoxItem>完成10%</ComboBoxItem>
+                                    </ComboBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="操作">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel>
+                                            <Button  CommandParameter="{Binding Path=index}" Grid.Row="0" Grid.Column="0"   Click="Button_Click_1" Style="{StaticResource ButtonListViewItem}">
+                                                <TextBlock Text="删除"></TextBlock>
+                                            </Button>
+                                            <Button  CommandParameter="{Binding Path=index}" Grid.Row="0" Grid.Column="1"  Click="Button_Click_2"  Style="{StaticResource ButtonListViewItem}">
+                                                <TextBlock Text="上移"></TextBlock>
+                                            </Button>
+                                            <Button  CommandParameter="{Binding Path=index}" Grid.Row="0" Grid.Column="2"  Click="Button_Click_3"  Style="{StaticResource ButtonListViewItem}">
+                                                <TextBlock Text="下移"></TextBlock>
+                                            </Button>
+                                        </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Grid  Grid.Column="0" Grid.Row="2" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0">下阶段</TextBlock>
+            <Button HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonNormal}" Click="Button_Click_8">
+                <TextBlock Text="添加一项"></TextBlock>
+            </Button>
+        </Grid>
+
+        <ListView x:Name="listView2" ItemsSource="{Binding}" Grid.Row="3" Grid.Column="0" >
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <!--<GridViewColumn>
+                            <GridViewColumnHeader Content="类型" Padding="5"/>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox DropDownClosed="ComboBox_DropDownClosed" SelectedIndex="{Binding Path=type_selected_index}" Style="{StaticResource SelectNormal}">
+                                        <ComboBoxItem>本阶段</ComboBoxItem>
+                                        <ComboBoxItem>下阶段</ComboBoxItem>
+                                    </ComboBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>-->
+                        <GridViewColumn Header="项目">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox  Style="{StaticResource SelectNormal}" Width="170" DropDownOpened="ComboBox_DropDownOpened" DropDownClosed="ComboBox_DropDownClosed_1" SelectedIndex="{Binding Path=project_selected_index}">
+                                        <ComboBoxItem>请选择项目</ComboBoxItem>
+                                        <ComboBoxItem>
+                                            <TextBox Width="170" TextChanged="TextBox_TextChanged" Padding="3" Margin="3"></TextBox>
+                                        </ComboBoxItem>
+                                        <ComboBoxItem Content="{Binding Path=project}"></ComboBoxItem>
+                                    </ComboBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="内容">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Width="400" Text="{Binding Path=content}" TextChanged="TextBox_TextChanged_1" Style="{StaticResource TextBoxNormal}"></TextBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="进度">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox DropDownClosed="ComboBox_DropDownClosed_2" SelectedIndex="{Binding Path=process_selected_index}"  Style="{StaticResource SelectNormal}">
+                                        <ComboBoxItem>不选也没事</ComboBoxItem>
+                                        <ComboBoxItem>已上线</ComboBoxItem>
+                                        <ComboBoxItem>测试中</ComboBoxItem>
+                                        <ComboBoxItem>已完成</ComboBoxItem>
+                                        <ComboBoxItem>完成90%</ComboBoxItem>
+                                        <ComboBoxItem>完成80%</ComboBoxItem>
+                                        <ComboBoxItem>完成70%</ComboBoxItem>
+                                        <ComboBoxItem>完成60%</ComboBoxItem>
+                                        <ComboBoxItem>完成50%</ComboBoxItem>
+                                        <ComboBoxItem>完成40%</ComboBoxItem>
+                                        <ComboBoxItem>完成30%</ComboBoxItem>
+                                        <ComboBoxItem>完成20%</ComboBoxItem>
+                                        <ComboBoxItem>完成10%</ComboBoxItem>
+                                    </ComboBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="操作">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel>
+                                        <Button  CommandParameter="{Binding Path=index}" Grid.Row="0" Grid.Column="0"   Click="Button_Click_1" Style="{StaticResource ButtonListViewItem}">
+                                            <TextBlock Text="删除"></TextBlock>
+                                        </Button>
+                                        <Button  CommandParameter="{Binding Path=index}" Grid.Row="0" Grid.Column="1"  Click="Button_Click_2"  Style="{StaticResource ButtonListViewItem}">
+                                            <TextBlock Text="上移"></TextBlock>
+                                        </Button>
+                                        <Button  CommandParameter="{Binding Path=index}" Grid.Row="0" Grid.Column="2"  Click="Button_Click_3"  Style="{StaticResource ButtonListViewItem}">
+                                            <TextBlock Text="下移"></TextBlock>
+                                        </Button>
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <WrapPanel Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" Margin="0,5,0,0">
+            <Button Margin="5" Click="Button_Click_4" Style="{StaticResource ButtonNormal}" Background="AliceBlue">
+                <TextBlock>保存</TextBlock>
+            </Button>
+            <Button  Margin="5" Click="Button_Click_6" Style="{StaticResource ButtonNormal}" Name="MyJobBtn">
+                <TextBlock>查看我的</TextBlock>
+            </Button>
+            <Button  Margin="5,5,0,5" Click="Button_Click_7" Style="{StaticResource ButtonNormal}" Name="AllJobBtn">
+                <TextBlock>查看大家</TextBlock>
+            </Button>
+        </WrapPanel>
+        
+    </Grid>
+
+</Window>

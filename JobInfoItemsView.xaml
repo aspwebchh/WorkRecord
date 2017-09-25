@@ -1,0 +1,12 @@
+﻿<Window x:Class="DH_ZhouBao.JobInfoItemsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DH_ZhouBao"
+        mc:Ignorable="d"
+        Title="查看详细" Height="400" Width="400" Closed="Window_Closed">
+    <Grid>
+        <TextBox Name="ContentView" IsReadOnly="True" Padding="10"></TextBox>
+    </Grid>
+</Window>
